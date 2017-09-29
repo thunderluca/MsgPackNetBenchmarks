@@ -1,16 +1,11 @@
-﻿using MsgPackNetBenchmarks.Shared.Models;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Numerics;
 using System.Text;
-using System.Threading.Tasks;
-using MsgPack.Serialization;
 
 namespace MsgPackNetBenchmarks.Shared
 {
     public static class Helpers
     {
-        public static MessagePackSerializer<Person> MsgPackSerializer = SerializationContext.Default.GetSerializer<Person>();
         public const int DefaultTimes = 200000;
 
         public static BigInteger DefaultBigInteger = BigInteger.Parse("19031457927716431901821234567890");

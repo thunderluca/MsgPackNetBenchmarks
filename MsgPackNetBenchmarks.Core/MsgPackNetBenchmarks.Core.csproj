@@ -2,13 +2,13 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp1.1</TargetFramework>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
   </PropertyGroup>
 
   <Import Project="..\MsgPackNetBenchmarks.Shared\MsgPackNetBenchmarks.Shared.projitems" Label="Shared" />
 
   <ItemGroup>
-    <PackageReference Include="MsgPack.Cli" Version="0.8.1" />
+    <PackageReference Include="MessagePack" Version="1.6.1.2" />
     <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
   </ItemGroup>
 

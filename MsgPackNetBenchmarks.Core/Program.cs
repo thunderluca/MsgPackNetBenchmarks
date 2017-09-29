@@ -1,13 +1,10 @@
 ﻿using MsgPackNetBenchmarks.Shared.Models;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
 using Newtonsoft.Json;
 using static MsgPackNetBenchmarks.Shared.Helpers;
+using MessagePack;
+using MessagePack.Resolvers;
 
 namespace MsgPackNetBenchmarks.Core
 {
@@ -91,12 +88,12 @@ namespace MsgPackNetBenchmarks.Core
                     Address = address
                 };
                 double startT = DateTime.UtcNow.ToMilliseconds();
-                byte[] b = MsgPackSerializer.PackSingleObject(person);
+                byte[] b = MessagePackSerializer.Serialize(person, ContractlessStandardResolver.Instance);
                 double finishT = DateTime.UtcNow.ToMilliseconds();
                 totalToMsgPack = totalToMsgPack + (finishT - startT);
 
                 double startF = DateTime.UtcNow.ToMilliseconds();
-                Person obj = MsgPackSerializer.UnpackSingleObject(b);
+                Person obj = MessagePackSerializer.Deserialize<Person>(b, ContractlessStandardResolver.Instance);
                 double finishF = DateTime.UtcNow.ToMilliseconds();
                 totalFromMsgPack = totalFromMsgPack + (finishF - startF);
             }
@@ -106,9 +103,9 @@ namespace MsgPackNetBenchmarks.Core
 
             LogBuilder.AppendLine(Environment.NewLine);
 
-            string userRoot = Environment.GetEnvironmentVariable("USERPROFILE");
+            var desktopRoot = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
 
-            File.AppendAllText(Path.Combine(userRoot, "Desktop", "msgPackLog.txt"), LogBuilder.ToString());
+            File.AppendAllText(Path.Combine(desktopRoot, "msgPackLog.txt"), LogBuilder.ToString());
         }
     }
 }

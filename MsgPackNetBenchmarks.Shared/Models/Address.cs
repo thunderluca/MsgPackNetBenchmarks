@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace MsgPackNetBenchmarks.Shared.Models
+﻿namespace MsgPackNetBenchmarks.Shared.Models
 {
     public class Address
     {
